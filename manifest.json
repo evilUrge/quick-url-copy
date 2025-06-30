@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "Quick URL Copy",
+  "version": "1.0.0",
+  "description": "Copy the current tab's URL to clipboard with Cmd+Shift+U (Mac) or Ctrl+Shift+U (Windows)",
+  "author": "Gilad Maoz",
+  "homepage_url": "https://github.com/evilurge/quick-url-copy",
+
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "clipboardWrite"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "commands": {
+    "copy-url": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Copy current tab URL to clipboard"
+    }
+  },
+
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

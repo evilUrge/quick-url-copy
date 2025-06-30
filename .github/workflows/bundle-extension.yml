@@ -1,0 +1,33 @@
+name: Bundle Extension for Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .zip archive (excluding .github)
+        run: |
+          zip -r quick-url-copy.zip . -x '*.git*' '.github/*'
+
+      - name: Create .xpi archive (Firefox extension, excluding .github)
+        run: |
+          cp quick-url-copy.zip quick-url-copy.xpi
+
+      - name: Upload .zip and .xpi as release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            quick-url-copy.zip
+            quick-url-copy.xpi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
